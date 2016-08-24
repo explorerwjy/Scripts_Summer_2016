@@ -1,0 +1,21 @@
+gene_select.py: A spark application to select variants according to certain criteria to make table small to readable
+Must Run on Biowulf for spark is need to handle the large table
+usage:$ sinteractive --exclusive --ntasks=1 --cpus-per-task=32
+	  $ module load spark
+	  $ spark-submit --conf spark.driver.maxResultSize=4g --driver-memory 20G --executor-memory 20G variant_selector.py \
+	  -h header_file -i big_table_file -g gene_list_file -o filtered_table -c config_file -ind individuals_file > log
+
+header_file: Header of ANNOVAR table, include information and individual's genotype of a variant 
+gene_list_file: Gene list of interested from big talbe 
+config_file: file contains Criteria to filter
+individuals_file: List of individuals to select from the big table
+
+config_file example:
+FUNC_TYPE=splicing;exonic;exonic,splicing
+#ALL POSSIBLE FUNC_TYPE: splicing;downstream;UTR5;ncRNA_exonic;intergenic;intronic;UTR3;exonic,splicing;exonic;upstream;ncRNA_intronic;.; 
+EXONIC_TYPE=synonymous_SNV;nonsynonymous_SNV;stoploss;stopgain;frameshift_insertion;frameshift_deletion;nonframeshift_insertion;nonframeshift_deletion;unknown
+#ALL POSSIBLE EXONIC_TYPE : synonymous_SNV;nonsynonymous_SNV;stoploss;stopgain;frameshift_insertion;frameshift_deletion;nonframeshift_insertion;nonframeshift_deletion;unknown;.;
+CADD=20
+ALLELE_DEPTH=5
+ALLELE_RATIO=0.3
+MAF=ExAC_ALL:0.01;ExAC_NFE:0.001;ExAC_AMR:0.005

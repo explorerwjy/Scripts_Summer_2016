@@ -1,0 +1,8 @@
+FUNC_TYPE=splicing;exonic;exonic,splicing
+#ALL POSSIBLE FUNC_TYPE: splicing;downstream;UTR5;ncRNA_exonic;intergenic;intronic;UTR3;exonic,splicing;exonic;upstream;ncRNA_intronic;.; 
+EXONIC_TYPE=synonymous_SNV;nonsynonymous_SNV;stoploss;stopgain;frameshift_insertion;frameshift_deletion;nonframeshift_insertion;nonframeshift_deletion;unknown
+#ALL POSSIBLE EXONIC_TYPE : synonymous_SNV;nonsynonymous_SNV;stoploss;stopgain;frameshift_insertion;frameshift_deletion;nonframeshift_insertion;nonframeshift_deletion;unknown;.;
+CADD=20
+ALLELE_DEPTH=5
+ALLELE_RATIO=0.3
+MAF=ExAC_ALL:0.01;ExAC_NFE:0.001;ExAC_AMR:0.005

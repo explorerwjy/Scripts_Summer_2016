@@ -1,0 +1,45 @@
+#Run test from epacts
+
+module load R; \
+module load EPACTS; \
+module load vcftools; \
+epacts group --groupf RetNet.grp --vcf all_filtered.multianno.recode.vcf.gz --ped all_filtered_with_head.ped \
+   --kin all_filtered.multianno.recode.kinf --test emmaxVT --out emmaxVT; \
+make -f emmaxVT.Makefile -j 16; \
+mv emmaxVT.epacts.top5000 emmaxVT.top5000.txt; \
+mv emmaxVT.epacts emmaxVT.epacts.txt; \
+mkdir result_set_emmaxVT; \
+mv emmaxVT.* result_set_emmaxVT;
+
+module load R; \
+module load EPACTS; \
+module load vcftools; \
+epacts group --groupf RetNet.grp --vcf all_filtered.multianno.recode.vcf.gz --ped all_filtered_with_head.ped \
+   --kin all_filtered.multianno.recode.kinf --test emmaxCMC --out emmaxCMC; \
+make -f emmaxCMC.Makefile -j 16; \
+mv emmaxCMC.epacts.top5000 emmaxCMC.top5000.txt; \
+mv emmaxCMC.epacts emmaxCMC.epacts.txt; \
+mkdir result_set_emmaxCMC; \
+mv emmaxCMC.* result_set_emmaxCMC;
+
+module load R; \
+module load EPACTS; \
+module load vcftools; \
+epacts group --groupf RetNet.grp --vcf all_filtered.multianno.recode.vcf.gz --ped all_filtered_with_head.ped \
+   --kin all_filtered.multianno.recode.kinf --test skat --out skat; \
+make -f skat.Makefile -j 16; \
+mv skat.epacts.top5000 skat.top5000.txt; \
+mv skat.epacts skat.epacts.txt; \
+mkdir result_set_skat; \
+mv skat.* result_set_skat;
+
+module load R; \
+module load EPACTS; \
+module load vcftools; \
+epacts group --groupf RetNet.grp --vcf all_filtered.multianno.recode.vcf.gz --ped all_filtered_with_head.ped \
+   --kin all_filtered.multianno.recode.kinf --test VT --out VT; \
+make -f VT.Makefile -j 16; \
+mv VT.epacts.top5000 VT.top5000.txt; \
+mv VT.epacts VT.epacts.txt; \
+mkdir result_set_VT; \
+mv VT.* result_set_VT;

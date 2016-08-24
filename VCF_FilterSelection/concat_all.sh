@@ -1,0 +1,24 @@
+vcf-concat \
+	chr01_filter_allele_depth.vcf \
+	chr02_filter_allele_depth.vcf \
+	chr03_filter_allele_depth.vcf \
+	chr04_filter_allele_depth.vcf \
+	chr05_filter_allele_depth.vcf \
+	chr06_filter_allele_depth.vcf \
+	chr07_filter_allele_depth.vcf \
+	chr08_filter_allele_depth.vcf \
+	chr09_filter_allele_depth.vcf \
+	chr10_filter_allele_depth.vcf \
+	chr11_filter_allele_depth.vcf \
+	chr12_filter_allele_depth.vcf \
+	chr13_filter_allele_depth.vcf \
+	chr14_filter_allele_depth.vcf \
+	chr15_filter_allele_depth.vcf \
+	chr16_filter_allele_depth.vcf \
+	chr17_filter_allele_depth.vcf \
+	chr18_filter_allele_depth.vcf \
+	chr19_filter_allele_depth.vcf \
+	chr20_filter_allele_depth.vcf \
+	chr21_filter_allele_depth.vcf \
+	chr22_filter_allele_depth.vcf \
+	| gzip -c > all_filtered.multianno.recode.vcf.gz

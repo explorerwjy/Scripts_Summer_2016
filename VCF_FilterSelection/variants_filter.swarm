@@ -1,0 +1,44 @@
+python variants_filter.py Filter_Exome/chr01_exomefiltered_recalibrated_SNP_INDEL_hg19_multianno.recode.vcf \
+	/data/wangj36/GenesetTest/VCF/chr01_filter_allele_depth.vcf
+python variants_filter.py Filter_Exome/chr02_exomefiltered_recalibrated_SNP_INDEL_hg19_multianno.recode.vcf \
+	/data/wangj36/GenesetTest/VCF/chr02_filter_allele_depth.vcf
+python variants_filter.py Filter_Exome/chr03_exomefiltered_recalibrated_SNP_INDEL_hg19_multianno.recode.vcf \
+	/data/wangj36/GenesetTest/VCF/chr03_filter_allele_depth.vcf
+python variants_filter.py Filter_Exome/chr04_exomefiltered_recalibrated_SNP_INDEL_hg19_multianno.recode.vcf \
+	/data/wangj36/GenesetTest/VCF/chr04_filter_allele_depth.vcf
+python variants_filter.py Filter_Exome/chr05_exomefiltered_recalibrated_SNP_INDEL_hg19_multianno.recode.vcf \
+	/data/wangj36/GenesetTest/VCF/chr05_filter_allele_depth.vcf
+python variants_filter.py Filter_Exome/chr06_exomefiltered_recalibrated_SNP_INDEL_hg19_multianno.recode.vcf \
+	/data/wangj36/GenesetTest/VCF/chr06_filter_allele_depth.vcf
+python variants_filter.py Filter_Exome/chr07_exomefiltered_recalibrated_SNP_INDEL_hg19_multianno.recode.vcf \
+	/data/wangj36/GenesetTest/VCF/chr07_filter_allele_depth.vcf
+python variants_filter.py Filter_Exome/chr08_exomefiltered_recalibrated_SNP_INDEL_hg19_multianno.recode.vcf \
+	/data/wangj36/GenesetTest/VCF/chr08_filter_allele_depth.vcf
+python variants_filter.py Filter_Exome/chr09_exomefiltered_recalibrated_SNP_INDEL_hg19_multianno.recode.vcf \
+	/data/wangj36/GenesetTest/VCF/chr09_filter_allele_depth.vcf
+python variants_filter.py Filter_Exome/chr10_exomefiltered_recalibrated_SNP_INDEL_hg19_multianno.recode.vcf \
+	/data/wangj36/GenesetTest/VCF/chr10_filter_allele_depth.vcf
+python variants_filter.py Filter_Exome/chr11_exomefiltered_recalibrated_SNP_INDEL_hg19_multianno.recode.vcf \
+	/data/wangj36/GenesetTest/VCF/chr11_filter_allele_depth.vcf
+python variants_filter.py Filter_Exome/chr12_exomefiltered_recalibrated_SNP_INDEL_hg19_multianno.recode.vcf \
+	/data/wangj36/GenesetTest/VCF/chr12_filter_allele_depth.vcf
+python variants_filter.py Filter_Exome/chr13_exomefiltered_recalibrated_SNP_INDEL_hg19_multianno.recode.vcf \
+	/data/wangj36/GenesetTest/VCF/chr13_filter_allele_depth.vcf
+python variants_filter.py Filter_Exome/chr14_exomefiltered_recalibrated_SNP_INDEL_hg19_multianno.recode.vcf \
+	/data/wangj36/GenesetTest/VCF/chr14_filter_allele_depth.vcf
+python variants_filter.py Filter_Exome/chr15_exomefiltered_recalibrated_SNP_INDEL_hg19_multianno.recode.vcf \
+	/data/wangj36/GenesetTest/VCF/chr15_filter_allele_depth.vcf
+python variants_filter.py Filter_Exome/chr16_exomefiltered_recalibrated_SNP_INDEL_hg19_multianno.recode.vcf \
+	/data/wangj36/GenesetTest/VCF/chr16_filter_allele_depth.vcf
+python variants_filter.py Filter_Exome/chr17_exomefiltered_recalibrated_SNP_INDEL_hg19_multianno.recode.vcf \
+	/data/wangj36/GenesetTest/VCF/chr17_filter_allele_depth.vcf
+python variants_filter.py Filter_Exome/chr18_exomefiltered_recalibrated_SNP_INDEL_hg19_multianno.recode.vcf \
+	/data/wangj36/GenesetTest/VCF/chr18_filter_allele_depth.vcf
+python variants_filter.py Filter_Exome/chr19_exomefiltered_recalibrated_SNP_INDEL_hg19_multianno.recode.vcf \
+	/data/wangj36/GenesetTest/VCF/chr19_filter_allele_depth.vcf
+python variants_filter.py Filter_Exome/chr20_exomefiltered_recalibrated_SNP_INDEL_hg19_multianno.recode.vcf \
+	/data/wangj36/GenesetTest/VCF/chr20_filter_allele_depth.vcf
+python variants_filter.py Filter_Exome/chr21_exomefiltered_recalibrated_SNP_INDEL_hg19_multianno.recode.vcf \
+	/data/wangj36/GenesetTest/VCF/chr21_filter_allele_depth.vcf
+python variants_filter.py Filter_Exome/chr22_exomefiltered_recalibrated_SNP_INDEL_hg19_multianno.recode.vcf \
+	/data/wangj36/GenesetTest/VCF/chr22_filter_allele_depth.vcf
