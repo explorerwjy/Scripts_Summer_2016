@@ -1,0 +1,28 @@
+STEPs to get variants ready to be tested.
+
+split_chr.swarm : split big vcf file by chromesomes.
+
+run_annovar.swarm : run ANNOVAR annotation on each chromesomes.
+
+filter_by_exome.swarm : Filter vcf file of each chromesomes by BED file.
+
+variants_filter.swarm & variants_filter.py :Leave out the variants that not match our requirements
+indcluing MAF, CADD, Allele Ratio & Read Depth, ref_func & exonic_func.
+Change the criteria in Main function. std out(swarm.o) will have a record of what criteria you run
+
+concat_all.sh : concat all filtered chromesome vcf file together into single one. Ready for test.
+
+Other scripts:
+run_find_alt_alelle.sh & find_alt_allele.py : Find variants with more than N alt alleles.
+
+custom_filter.swarm : run custom filter from pyvcf.
+vcf_filter.py & custom_vcf_filters.py should be put under custom python env according to swarm file
+
+
+quality_check.swarm & individual_variant_count.py & merge_counts.py : Find number of different kinds of exonic vairants in each sample and merge them together.
+Fisrt run quality_check.swarm, it will run the individual_variant_count.py get stats of each chromesome.
+Second run merge_counts.py, it will merge all stats from each chromesome together.
+
+
+TiTvRatio.sh : Calculate TiTv Ratio. It calculate on different chromesomes and combine the results.
+It runs with variants_filter.py, you need set some criteria in this python script.

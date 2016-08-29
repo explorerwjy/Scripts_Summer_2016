@@ -1,0 +1,25 @@
+Download 1000G data as controls.
+
+1000_GenomeProjectPhase3_SampleDetails.txt & 20130502.phase3.analysis.sequence.index File contains some infomation about controls.
+Filterd_with_POP.index Select two file for each individual. Will download Fastq file according to this file
+
+STEP1:
+get_data_list.py
+select control files to download and generate Filterd_file.index, Filterd_with_POP.index.
+First run step 1 get Filterd_file.index from 20130502.phase3.analysis.sequence.index
+Second run step 2 get Filterd_with_POP.index 1000_GenomeProjectPhase3_SampleDetails.txt
+
+
+STEP2:
+download_data.sh Generate swarm file to perform downloads according to Filterd_with_POP.inedx.
+
+OR 
+
+STEP2:
+make_download.py Give supur population and population, generate sh cmds to download fastq files.
+python make_download.py --s supur_population --p population
+outputs: download_data_EUR_IBS.sh swarm/sbatch to download fastq files
+
+STEP3:Download the fastq file according to sh cmd generated.
+
+count.py & filelist.txt: choose fastq file with right sizes.

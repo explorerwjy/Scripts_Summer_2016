@@ -1,0 +1,29 @@
+RNAPileline.py : Create directory and Generate scripts to call variants from Whole Exome sequencing
+Put this script under a 'root' folder to run whole pipeline, for example ../path/to/RNAPileline/
+
+./RNAPileline -h/-help Print Hele Message
+
+Steps To Run the Pipeline:
+step 0 :
+./RNAPileline -step 0  
+Create folders to store files needed
+It will create Fastq, BAM, Script and Variant folder under 'Root' directory.
+
+After this step, you need to copy all Fastq files under 'Fastq' folder.
+
+step 1:
+./RNAPileline -step 1  
+Run the first part Data pre-processing
+It will generate meta_data_meta.csv contains fastq file names.
+It will generate swarm scripts to get BAM files from Fastq files.
+
+After this step, bam file will appear under 'BAM' folder, you can copy more bam file under this 'BAM' folder to call variants in next step.
+
+step 2:
+./RNAPileline -step 2  
+Run the second part Variant Discovery
+It will generate scripts to calculate coverage of bam over Exome Region (bed file). 
+It will generate swarm scripts to call variants from BAM files under 'BAM' folder.
+
+After this step, vcf file will appear under 'Variant' folder.
+

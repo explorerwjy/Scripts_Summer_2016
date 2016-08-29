@@ -1,0 +1,385 @@
+#!/usr/local/bin/perl
+
+use lib "/usr/local/slurm/lib/site_perl/5.12.1/x86_64-linux-thread-multi";
+use lib "/usr/local/slurm/lib/perl5/site_perl/5.18.2/x86_64-linux-thread-multi-ld";
+
+use Slurm;
+use Data::Dumper;
+use Getopt::Long qw(:config no_ignore_case);
+Getopt::Long::Configure("bundling"); # allows option bundling
+
+my %CONFIG;
+$CONFIG{column_limit} = 10;
+
+# Job state is reported with a number, which can then be converted to a string.  We want to further convert
+# the string to a short two character value.
+my %short_state = (
+  PENDING => "PD",
+  RUNNING => "R",
+  SUSPENDED => "SU",
+  CANCELLED => "CA",
+  COMPLETING => "CG",
+  COMPLETED => "CD",
+  CONFIGURING => "CF",
+  FAILED => "F",
+  TIMEOUT => "TO",
+  PREEMPTED => "PR",
+  NODE_FAIL => "NF",
+  SPECIAL_EXIT => "SE",
+);
+
+setOptions();
+
+my $jobs_queued = 0;
+my $jobs_running = 0;
+my $DATA = sjobs_data();
+my ($x,$y,$z) = create_sjobs_object($DATA);
+sjobs_report($x,$y,$z);
+
+#==============================================================================
+sub setOptions
+{
+  &GetOptions(
+    "u=s"  => \$OPT{user},
+    "a"  => \$OPT{all},
+    "h"  => \$OPT{help},
+    "help"  => \$OPT{help},
+    "noheader"  => \$OPT{noheader},
+    "cpus"  => \$OPT{cpus},
+    "compress"  => \$OPT{compress},
+    "running"  => \$OPT{running},
+    "pending"  => \$OPT{pending},
+    "swarms"  => \$OPT{swarms},
+    "no-column-limit"  => \$OPT{no_column_limit},
+  ) || printOptions();
+
+  printOptions() if ($OPT{help});
+
+  if ($OPT{user}) {
+    my (undef,undef,$uid) = getpwnam($OPT{user});
+    die "User '$OPT{user}' unknown\n" unless (defined $uid);
+  }
+  
+  if ((!$OPT{all}) && (!$OPT{user})) {
+    ($OPT{user}) = getpwuid($<);
+  }
+  if ($OPT{running} && $OPT{pending}) {
+    undef $OPT{running};
+    undef $OPT{pending};
+  }
+}
+#==============================================================================
+sub printOptions
+{
+  print <<EOF;
+
+Usage: sjobs [ -u user | -a ]
+
+  -a           show all users
+  -u [ user ]  show selected user
+  --compress   squish jobarrays to two lines
+  --running    show only running jobs
+  --pending    show only pending jobs
+  --swarms     show only swarms
+  --noheader   don't show header rows and bars
+  -h,--help    show this menu
+
+  --no-column-limit
+               columns in the display are limited to $CONFIG{column_limit} spaces
+               in width; this option lifts this limitation
+
+EOF
+  exit;
+}
+#==============================================================================
+sub sjobs_data
+{
+  my $x;
+
+# Get info on the jobs
+  my $slurm = Slurm::new();
+  my $jobs = $slurm->load_jobs();
+
+# Print specific info on jobs
+  JOB: foreach my $ref (@{$jobs->{job_array}}) {
+
+# We only care about running and pending jobs
+    my $state = $short_state{$slurm->job_state_string($ref->{job_state})}; 
+    next JOB unless ($state eq "R" || $state eq "PD");
+    next JOB if ($OPT{pending} && $state eq "R");
+    next JOB if ($OPT{running} && $state eq "PD");
+
+# Only show the jobs that belong to the user running sjobs, unless -a is given 
+    my ($uname,undef,undef) = getpwuid($ref->{user_id});
+    next JOB if ((defined $OPT{user}) && ($uname ne $OPT{user}));
+
+# Only show swarm jobs if desired
+    next JOB if ($OPT{swarms} && ($ref->{command} !~/^\/spin1\/swarm\//));
+ 
+    my $runelapsed = time() - $ref->{start_time}; 
+    $runelapsed = 0 if (!$ref->{start_time} || $runelapsed < 0);
+
+# Memory is reported in a very kooky way
+    my $mem = convert_memory($ref->{pn_min_memory});
+ 
+# Jobid must be rewritten for job arrays 
+    my $jobid = $ref->{job_id};
+    my $basejobid = $jobid;
+
+# Job array
+    my $ja;
+    if ($jobid && $ref->{array_job_id} > 0) {
+      $ja = 1;
+      $basejobid = $ref->{array_job_id};
+
+      if ($ref->{array_task_id} < 10000) {
+        $jobid = $ref->{array_job_id}."_".$ref->{array_task_id};
+        $cpus_running += $ref->{num_cpus} if ($state eq 'R'); 
+        $cpus_queued += $ref->{num_cpus} if ($state eq 'PD'); 
+        $jobs_running += 1 if ($state eq 'R');
+        $jobs_queued += 1 if ($state eq 'PD');
+      }
+      else {
+        $jobid = $ref->{array_job_id}."_[".$ref->{array_task_str}."]";
+
+# The array_task_str can be really weird.  If it exceeds 60 characters long, it is truncated:
+        if ($ref->{array_task_str} =~/\.\.\./) { # bloody crap, the string is indeterminate!
+          $ref->{num_cpus} = '---';
+        }
+# Otherwise, array_task_str can end with a '%', and is a comma-delimited list of ranges
+        else {
+          my $actual_num_cpus=0;
+          my ($tmp1,undef) = split "%",$ref->{array_task_str}; # get rid of max simultaneous running tasks number, if set
+          foreach my $range (split ",",$tmp1) {
+            my $num = 1;
+# The range elements can be hyphen-delimited integers indicating a subrange, or single integers indicating a single job
+            if ($range =~/\-/) {
+              my ($start,$finish) = split "-",$range;
+              $num = ( $finish - $start ) + 1;
+            }
+            $actual_num_cpus += ($num * $ref->{num_cpus});
+            if ($state eq 'R') {
+              $cpus_running += ($num * $ref->{num_cpus});
+              $jobs_running += $num;
+            }
+            elsif ($state eq 'PD') {
+              $cpus_queued += ($num * $ref->{num_cpus});
+              $jobs_queued += $num;
+            }
+          }
+          $ref->{num_cpus} = $actual_num_cpus;
+        }
+      }
+    }
+
+# Ordinary job
+    else {
+      $cpus_running += $ref->{num_cpus} if ($state eq 'R'); 
+      $cpus_queued += $ref->{num_cpus} if ($state eq 'PD'); 
+      $jobs_running += 1 if ($state eq 'R');
+      $jobs_queued += 1 if ($state eq 'PD');
+    }
+
+    if ($OPT{compress} && $ja && ($state eq 'R')) {
+      $x->{$basejobid}{uname} = $uname;
+      $x->{$basejobid}{time_limit} = $ref->{time_limit}*60; # time_limit is in minutes
+      $x->{$basejobid}{jobid} = $jobid;
+      $x->{$basejobid}{name} = $ref->{name};
+      $x->{$basejobid}{partition} = $ref->{partition};
+      $x->{$basejobid}{state} = $state;
+      $x->{$basejobid}{num_nodes} = $ref->{num_nodes};
+      $x->{$basejobid}{mem} = $mem;
+      $x->{$basejobid}{dependency} = $ref->{dependency};
+      if ((not defined $x->{$basejobid}{runelapsed}) || ($x->{$basejobid}{runelapsed} > $runelapsed)) {
+        $x->{$basejobid}{runelapsed} = $runelapsed;
+      }
+      $x->{$basejobid}{nodes} = "---";
+      $x->{$basejobid}{num_cpus} += $ref->{num_cpus};
+    }
+    else {
+      $x->{$jobid}{uname} = $uname;
+      $x->{$jobid}{time_limit} = $ref->{time_limit}*60; # time_limit is in minutes
+      $x->{$jobid}{jobid} = $jobid;
+      $x->{$jobid}{name} = $ref->{name};
+      $x->{$jobid}{partition} = $ref->{partition};
+      $x->{$jobid}{state} = $state;
+      $x->{$jobid}{runelapsed} = $runelapsed;
+      $x->{$jobid}{num_nodes} = $ref->{num_nodes};
+      $x->{$jobid}{mem} = $mem;
+      $x->{$jobid}{dependency} = $ref->{dependency};
+      if ($OPT{compress}) { $x->{$jobid}{nodes} = "---"; } else { $x->{$jobid}{nodes} = $ref->{nodes}; }
+      $x->{$jobid}{num_cpus} = $ref->{num_cpus};
+      if (($state eq 'PD') && ($ref->{state_reason})) {
+        $x->{$jobid}{state_reason} = $slurm->job_reason_string($ref->{state_reason});
+      }
+      else {
+        $x->{$jobid}{state_reason} = "---";
+      }
+    }
+  }
+  return $x;
+}
+#==============================================================================
+sub sjobs_report
+{
+  my ($x,$y,$z) = @_;
+
+# Don't bother if there are no jobs
+  die "No jobs queued or running\n" unless ($y || $z);
+
+  my $l = shift @{$x};
+
+  my $format1 = "%-${$l}[0]s  %-${$l}[1]s  %-${$l}[2]s  %-${$l}[3]s  %-${$l}[4]s  %-${$l}[5]s  %-${$l}[6]s  %-${$l}[7]s  %-${$l}[8]s  %-${$l}[9]s  %-${$l}[10]s  %-${$l}[11]s %-${$l}[12]s\n";
+  my $format2 = "%-${$l}[0]s  %-${$l}[1]s  %-${$l}[2]s  %-${$l}[3]s  %-${$l}[4]s  %-${$l}[5]s  %${$l}[6]s  %${$l}[7]s  %${$l}[8]s  %${$l}[9]s  %${$l}[10]s  %-${$l}[11]s  %-${$l}[12]s\n";
+
+  my $h = shift @{$x};
+  my $head =sprintf($format1,@{$h});
+
+  my $bar;
+  foreach my $i (0 .. length($head)) { $bar .= "="; }
+  $head .= "$bar\n";
+
+  print $head if (!$OPT{noheader});
+
+# Print specific info on jobs
+  JOB: foreach my $t (@{$x}) {
+    printf($format2,@{$t});
+  }
+
+  if (!$OPT{noheader}) {
+    print "$bar\n";
+    print "cpus running = $y\n";
+    print "cpus queued = $z\n";
+    print "jobs running = $jobs_running\n";
+    print "jobs queued = $jobs_queued\n";
+  }
+  
+}
+#==============================================================================
+sub create_sjobs_object
+{
+  my $AoA;
+
+  my $cpus_running=0;
+  my $cpus_queued=0;
+
+  my $x = shift;
+
+  my @headers = qw/User JobId JobName Part St Reason Runtime Walltime Nodes CPUs Memory Dependency Nodelist/;
+
+  push @{$AoA},\@headers;
+
+
+# Normally, we limit the length of the jobid to 15 characters, and the name of the job to 12 characters.
+  my $max_jobid_length = 15;
+  my $max_name_length = 12;
+  if ($OPT{no_column_limit}) { 
+    $max_jobid_length = 9999999999; 
+    $max_name_length = 9999999999; 
+  }
+
+  JOB: foreach my $j (sort keys %$x) {
+
+    $cpus_running += $x->{$j}{num_cpus} if ($x->{$j}{state} eq 'R'); 
+    $cpus_queued += $x->{$j}{num_cpus} if ($x->{$j}{state} eq 'PD'); 
+
+    my @tmp = (
+      $x->{$j}{uname},
+      substr($j,0,$max_jobid_length),
+      substr($x->{$j}{name},0,$max_name_length),
+      substr($x->{$j}{partition},0,8),
+      $x->{$j}{state},
+      $x->{$j}{state_reason},
+      seconds_to_clock($x->{$j}{runelapsed}),
+      seconds_to_clock($x->{$j}{time_limit}),
+      $x->{$j}{num_nodes},
+      $x->{$j}{num_cpus},
+      $x->{$j}{mem},
+      $x->{$j}{dependency},
+      $x->{$j}{nodes},
+    );
+
+    push @{$AoA},\@tmp;
+  }
+
+# Find max length of each value
+
+  my @lens;
+  foreach my $t (@{$AoA}) {
+    my @tmp = @{$t};
+    foreach my $j (0 .. $#tmp) {
+      my $l = length($tmp[$j]);
+      if (not defined $lens[$j]) {
+        push @lens,$l;
+      }
+      else { 
+        if ($lens[$j] < $l) {
+          $lens[$j] = $l;
+        }
+      }
+    }
+  }
+
+# Limit the final length
+#  if (!$OPT{no_column_limit}) {
+#    $lens[$#lens] = $CONFIG{column_limit} if ($lens[$#lens] > $CONFIG{column_limit});
+#  }
+
+  unshift @{$AoA},\@lens;
+
+  return $AoA,$cpus_running,$cpus_queued;
+}
+#==============================================================================
+sub convert_memory
+{
+  my $inp = shift;
+  my $out;
+
+  if ($inp > 2147483648) { # mem-per-cpu
+    $out = ($inp - 2147483648); # Mc
+    if ($out >= 1024) {
+      $out = int($out/1024); # Gc
+      $out .= "GB/cpu";
+    }
+    else {
+      $out .= "MB/cpu";
+    }
+  }
+  else { # mem
+    $out = $inp; # Mn
+    if ($out >= 1024) {
+      $out = int($out/1024); #Gn
+      $out .= "GB/node";
+    }
+    else {
+      $out .= "MB/node";
+    }
+  }
+
+  return $out;
+}
+#==============================================================================
+sub seconds_to_clock
+# converts seconds to clock time (D*-HH:MM:SS)
+{
+  my($time) = @_;
+  my($sec) = 0;
+  my($min) = 0;
+  my($hrs) = 0;
+  my($day) = 0;
+  $sec = $time;
+  $min = $sec / 60;
+  $sec = $sec % 60;
+  if ($min > 60) {
+    $hrs = $min / 60;
+    $min = $min % 60;
+    if ($hrs > 24) {
+      $day = $hrs / 24;
+      $hrs = $hrs % 24;
+           return sprintf ("%d-%02d:%02d:%02d",$day,$hrs,$min,$sec);
+    }
+    else { return sprintf ("%2d:%02d:%02d",$hrs,$min,$sec); }
+  }
+  else {   return sprintf ("%2d:%02d",$min,$sec); }
+}
+#==============================================================================

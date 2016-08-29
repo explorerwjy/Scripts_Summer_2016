@@ -2,112 +2,112 @@
 # ExonicFunc.refGene != synonymous_SNV && Func.refGene == exonic && ExAC_NFE <= 0.01 
 # allele_filtered -> maf&not_syn&exnoic 
 module load Anaconda; \
-source activate myenv_py27; \
-cd /data/wangj36/python/envs/myenv_py27; \
-vcf_filter.py --local-script custom_vcf_filters.py /data/wangj36/VCF_files/EUR_CASE/split_by_chrome/allele_depth_filterd/AD_0.3_DP_10/chr01_filter_allele_depth.vcf exonicfunc-refGene-not-syn exac-nfe-maf func-refgene > /data/wangj36/VCF_files/EUR_CASE/split_by_chrome/allele_depth_filterd_func_maf/chr01_func_exome_maf_AD_filtered.vcf;
+export PATH=/data/wangj36/python/envs/myenv_py27/bin:$PATH; \
+cd /data/wangj36/python/envs/myenv_py27/bin; \
+vcf_filter.py --local-script custom_vcf_filters.py /data/wangj36/VCF_files/AMR_299/split_by_chrome/Filter_Allele_Depth/AD_0.3_DP_10/chr01_filter_allele_depth.vcf exonicfunc-refGene-not-syn exac-nfe-maf func-refgene > /data/wangj36/VCF_files/AMR_299/split_by_chrome/Filter_Func_Maf_AD/chr01_func_exome_maf_AD_filtered.vcf;
 
 module load Anaconda; \
-source activate myenv_py27; \
-cd /data/wangj36/python/envs/myenv_py27; \
-vcf_filter.py --local-script custom_vcf_filters.py /data/wangj36/VCF_files/EUR_CASE/split_by_chrome/allele_depth_filterd/AD_0.3_DP_10/chr02_filter_allele_depth.vcf exonicfunc-refGene-not-syn exac-nfe-maf func-refgene > /data/wangj36/VCF_files/EUR_CASE/split_by_chrome/allele_depth_filterd_func_maf/chr02_func_exome_maf_AD_filtered.vcf;
+export PATH=/data/wangj36/python/envs/myenv_py27/bin:$PATH; \
+cd /data/wangj36/python/envs/myenv_py27/bin; \
+vcf_filter.py --local-script custom_vcf_filters.py /data/wangj36/VCF_files/AMR_299/split_by_chrome/Filter_Allele_Depth/AD_0.3_DP_10/chr02_filter_allele_depth.vcf exonicfunc-refGene-not-syn exac-nfe-maf func-refgene > /data/wangj36/VCF_files/AMR_299/split_by_chrome/Filter_Func_Maf_AD/chr02_func_exome_maf_AD_filtered.vcf;
 
 module load Anaconda; \
-source activate myenv_py27; \
-cd /data/wangj36/python/envs/myenv_py27; \
-vcf_filter.py --local-script custom_vcf_filters.py /data/wangj36/VCF_files/EUR_CASE/split_by_chrome/allele_depth_filterd/AD_0.3_DP_10/chr03_filter_allele_depth.vcf exonicfunc-refGene-not-syn exac-nfe-maf func-refgene > /data/wangj36/VCF_files/EUR_CASE/split_by_chrome/allele_depth_filterd_func_maf/chr03_func_exome_maf_AD_filtered.vcf;
+export PATH=/data/wangj36/python/envs/myenv_py27/bin:$PATH; \
+cd /data/wangj36/python/envs/myenv_py27/bin; \
+vcf_filter.py --local-script custom_vcf_filters.py /data/wangj36/VCF_files/AMR_299/split_by_chrome/Filter_Allele_Depth/AD_0.3_DP_10/chr03_filter_allele_depth.vcf exonicfunc-refGene-not-syn exac-nfe-maf func-refgene > /data/wangj36/VCF_files/AMR_299/split_by_chrome/Filter_Func_Maf_AD/chr03_func_exome_maf_AD_filtered.vcf;
 
 module load Anaconda; \
-source activate myenv_py27; \
-cd /data/wangj36/python/envs/myenv_py27; \
-vcf_filter.py --local-script custom_vcf_filters.py /data/wangj36/VCF_files/EUR_CASE/split_by_chrome/allele_depth_filterd/AD_0.3_DP_10/chr04_filter_allele_depth.vcf exonicfunc-refGene-not-syn exac-nfe-maf func-refgene > /data/wangj36/VCF_files/EUR_CASE/split_by_chrome/allele_depth_filterd_func_maf/chr04_func_exome_maf_AD_filtered.vcf;
+export PATH=/data/wangj36/python/envs/myenv_py27/bin:$PATH; \
+cd /data/wangj36/python/envs/myenv_py27/bin; \
+vcf_filter.py --local-script custom_vcf_filters.py /data/wangj36/VCF_files/AMR_299/split_by_chrome/Filter_Allele_Depth/AD_0.3_DP_10/chr04_filter_allele_depth.vcf exonicfunc-refGene-not-syn exac-nfe-maf func-refgene > /data/wangj36/VCF_files/AMR_299/split_by_chrome/Filter_Func_Maf_AD/chr04_func_exome_maf_AD_filtered.vcf;
 
 module load Anaconda; \
-source activate myenv_py27; \
-cd /data/wangj36/python/envs/myenv_py27; \
-vcf_filter.py --local-script custom_vcf_filters.py /data/wangj36/VCF_files/EUR_CASE/split_by_chrome/allele_depth_filterd/AD_0.3_DP_10/chr05_filter_allele_depth.vcf exonicfunc-refGene-not-syn exac-nfe-maf func-refgene > /data/wangj36/VCF_files/EUR_CASE/split_by_chrome/allele_depth_filterd_func_maf/chr05_func_exome_maf_AD_filtered.vcf;
+export PATH=/data/wangj36/python/envs/myenv_py27/bin:$PATH; \
+cd /data/wangj36/python/envs/myenv_py27/bin; \
+vcf_filter.py --local-script custom_vcf_filters.py /data/wangj36/VCF_files/AMR_299/split_by_chrome/Filter_Allele_Depth/AD_0.3_DP_10/chr05_filter_allele_depth.vcf exonicfunc-refGene-not-syn exac-nfe-maf func-refgene > /data/wangj36/VCF_files/AMR_299/split_by_chrome/Filter_Func_Maf_AD/chr05_func_exome_maf_AD_filtered.vcf;
 
 module load Anaconda; \
-source activate myenv_py27; \
-cd /data/wangj36/python/envs/myenv_py27; \
-vcf_filter.py --local-script custom_vcf_filters.py /data/wangj36/VCF_files/EUR_CASE/split_by_chrome/allele_depth_filterd/AD_0.3_DP_10/chr06_filter_allele_depth.vcf exonicfunc-refGene-not-syn exac-nfe-maf func-refgene > /data/wangj36/VCF_files/EUR_CASE/split_by_chrome/allele_depth_filterd_func_maf/chr06_func_exome_maf_AD_filtered.vcf;
+export PATH=/data/wangj36/python/envs/myenv_py27/bin:$PATH; \
+cd /data/wangj36/python/envs/myenv_py27/bin; \
+vcf_filter.py --local-script custom_vcf_filters.py /data/wangj36/VCF_files/AMR_299/split_by_chrome/Filter_Allele_Depth/AD_0.3_DP_10/chr06_filter_allele_depth.vcf exonicfunc-refGene-not-syn exac-nfe-maf func-refgene > /data/wangj36/VCF_files/AMR_299/split_by_chrome/Filter_Func_Maf_AD/chr06_func_exome_maf_AD_filtered.vcf;
 
 module load Anaconda; \
-source activate myenv_py27; \
-cd /data/wangj36/python/envs/myenv_py27; \
-vcf_filter.py --local-script custom_vcf_filters.py /data/wangj36/VCF_files/EUR_CASE/split_by_chrome/allele_depth_filterd/AD_0.3_DP_10/chr07_filter_allele_depth.vcf exonicfunc-refGene-not-syn exac-nfe-maf func-refgene > /data/wangj36/VCF_files/EUR_CASE/split_by_chrome/allele_depth_filterd_func_maf/chr07_func_exome_maf_AD_filtered.vcf;
+export PATH=/data/wangj36/python/envs/myenv_py27/bin:$PATH; \
+cd /data/wangj36/python/envs/myenv_py27/bin; \
+vcf_filter.py --local-script custom_vcf_filters.py /data/wangj36/VCF_files/AMR_299/split_by_chrome/Filter_Allele_Depth/AD_0.3_DP_10/chr07_filter_allele_depth.vcf exonicfunc-refGene-not-syn exac-nfe-maf func-refgene > /data/wangj36/VCF_files/AMR_299/split_by_chrome/Filter_Func_Maf_AD/chr07_func_exome_maf_AD_filtered.vcf;
 
 module load Anaconda; \
-source activate myenv_py27; \
-cd /data/wangj36/python/envs/myenv_py27; \
-vcf_filter.py --local-script custom_vcf_filters.py /data/wangj36/VCF_files/EUR_CASE/split_by_chrome/allele_depth_filterd/AD_0.3_DP_10/chr08_filter_allele_depth.vcf exonicfunc-refGene-not-syn exac-nfe-maf func-refgene > /data/wangj36/VCF_files/EUR_CASE/split_by_chrome/allele_depth_filterd_func_maf/chr08_func_exome_maf_AD_filtered.vcf;
+export PATH=/data/wangj36/python/envs/myenv_py27/bin:$PATH; \
+cd /data/wangj36/python/envs/myenv_py27/bin; \
+vcf_filter.py --local-script custom_vcf_filters.py /data/wangj36/VCF_files/AMR_299/split_by_chrome/Filter_Allele_Depth/AD_0.3_DP_10/chr08_filter_allele_depth.vcf exonicfunc-refGene-not-syn exac-nfe-maf func-refgene > /data/wangj36/VCF_files/AMR_299/split_by_chrome/Filter_Func_Maf_AD/chr08_func_exome_maf_AD_filtered.vcf;
 
 module load Anaconda; \
-source activate myenv_py27; \
-cd /data/wangj36/python/envs/myenv_py27; \
-vcf_filter.py --local-script custom_vcf_filters.py /data/wangj36/VCF_files/EUR_CASE/split_by_chrome/allele_depth_filterd/AD_0.3_DP_10/chr09_filter_allele_depth.vcf exonicfunc-refGene-not-syn exac-nfe-maf func-refgene > /data/wangj36/VCF_files/EUR_CASE/split_by_chrome/allele_depth_filterd_func_maf/chr09_func_exome_maf_AD_filtered.vcf;
+export PATH=/data/wangj36/python/envs/myenv_py27/bin:$PATH; \
+cd /data/wangj36/python/envs/myenv_py27/bin; \
+vcf_filter.py --local-script custom_vcf_filters.py /data/wangj36/VCF_files/AMR_299/split_by_chrome/Filter_Allele_Depth/AD_0.3_DP_10/chr09_filter_allele_depth.vcf exonicfunc-refGene-not-syn exac-nfe-maf func-refgene > /data/wangj36/VCF_files/AMR_299/split_by_chrome/Filter_Func_Maf_AD/chr09_func_exome_maf_AD_filtered.vcf;
 
 module load Anaconda; \
-source activate myenv_py27; \
-cd /data/wangj36/python/envs/myenv_py27; \
-vcf_filter.py --local-script custom_vcf_filters.py /data/wangj36/VCF_files/EUR_CASE/split_by_chrome/allele_depth_filterd/AD_0.3_DP_10/chr10_filter_allele_depth.vcf exonicfunc-refGene-not-syn exac-nfe-maf func-refgene > /data/wangj36/VCF_files/EUR_CASE/split_by_chrome/allele_depth_filterd_func_maf/chr10_func_exome_maf_AD_filtered.vcf;
+export PATH=/data/wangj36/python/envs/myenv_py27/bin:$PATH; \
+cd /data/wangj36/python/envs/myenv_py27/bin; \
+vcf_filter.py --local-script custom_vcf_filters.py /data/wangj36/VCF_files/AMR_299/split_by_chrome/Filter_Allele_Depth/AD_0.3_DP_10/chr10_filter_allele_depth.vcf exonicfunc-refGene-not-syn exac-nfe-maf func-refgene > /data/wangj36/VCF_files/AMR_299/split_by_chrome/Filter_Func_Maf_AD/chr10_func_exome_maf_AD_filtered.vcf;
 
 module load Anaconda; \
-source activate myenv_py27; \
-cd /data/wangj36/python/envs/myenv_py27; \
-vcf_filter.py --local-script custom_vcf_filters.py /data/wangj36/VCF_files/EUR_CASE/split_by_chrome/allele_depth_filterd/AD_0.3_DP_10/chr11_filter_allele_depth.vcf exonicfunc-refGene-not-syn exac-nfe-maf func-refgene > /data/wangj36/VCF_files/EUR_CASE/split_by_chrome/allele_depth_filterd_func_maf/chr11_func_exome_maf_AD_filtered.vcf;
+export PATH=/data/wangj36/python/envs/myenv_py27/bin:$PATH; \
+cd /data/wangj36/python/envs/myenv_py27/bin; \
+vcf_filter.py --local-script custom_vcf_filters.py /data/wangj36/VCF_files/AMR_299/split_by_chrome/Filter_Allele_Depth/AD_0.3_DP_10/chr11_filter_allele_depth.vcf exonicfunc-refGene-not-syn exac-nfe-maf func-refgene > /data/wangj36/VCF_files/AMR_299/split_by_chrome/Filter_Func_Maf_AD/chr11_func_exome_maf_AD_filtered.vcf;
 
 module load Anaconda; \
-source activate myenv_py27; \
-cd /data/wangj36/python/envs/myenv_py27; \
-vcf_filter.py --local-script custom_vcf_filters.py /data/wangj36/VCF_files/EUR_CASE/split_by_chrome/allele_depth_filterd/AD_0.3_DP_10/chr12_filter_allele_depth.vcf exonicfunc-refGene-not-syn exac-nfe-maf func-refgene > /data/wangj36/VCF_files/EUR_CASE/split_by_chrome/allele_depth_filterd_func_maf/chr12_func_exome_maf_AD_filtered.vcf;
+export PATH=/data/wangj36/python/envs/myenv_py27/bin:$PATH; \
+cd /data/wangj36/python/envs/myenv_py27/bin; \
+vcf_filter.py --local-script custom_vcf_filters.py /data/wangj36/VCF_files/AMR_299/split_by_chrome/Filter_Allele_Depth/AD_0.3_DP_10/chr12_filter_allele_depth.vcf exonicfunc-refGene-not-syn exac-nfe-maf func-refgene > /data/wangj36/VCF_files/AMR_299/split_by_chrome/Filter_Func_Maf_AD/chr12_func_exome_maf_AD_filtered.vcf;
 
 module load Anaconda; \
-source activate myenv_py27; \
-cd /data/wangj36/python/envs/myenv_py27; \
-vcf_filter.py --local-script custom_vcf_filters.py /data/wangj36/VCF_files/EUR_CASE/split_by_chrome/allele_depth_filterd/AD_0.3_DP_10/chr13_filter_allele_depth.vcf exonicfunc-refGene-not-syn exac-nfe-maf func-refgene > /data/wangj36/VCF_files/EUR_CASE/split_by_chrome/allele_depth_filterd_func_maf/chr13_func_exome_maf_AD_filtered.vcf;
+export PATH=/data/wangj36/python/envs/myenv_py27/bin:$PATH; \
+cd /data/wangj36/python/envs/myenv_py27/bin; \
+vcf_filter.py --local-script custom_vcf_filters.py /data/wangj36/VCF_files/AMR_299/split_by_chrome/Filter_Allele_Depth/AD_0.3_DP_10/chr13_filter_allele_depth.vcf exonicfunc-refGene-not-syn exac-nfe-maf func-refgene > /data/wangj36/VCF_files/AMR_299/split_by_chrome/Filter_Func_Maf_AD/chr13_func_exome_maf_AD_filtered.vcf;
 
 module load Anaconda; \
-source activate myenv_py27; \
-cd /data/wangj36/python/envs/myenv_py27; \
-vcf_filter.py --local-script custom_vcf_filters.py /data/wangj36/VCF_files/EUR_CASE/split_by_chrome/allele_depth_filterd/AD_0.3_DP_10/chr14_filter_allele_depth.vcf exonicfunc-refGene-not-syn exac-nfe-maf func-refgene > /data/wangj36/VCF_files/EUR_CASE/split_by_chrome/allele_depth_filterd_func_maf/chr14_func_exome_maf_AD_filtered.vcf;
+export PATH=/data/wangj36/python/envs/myenv_py27/bin:$PATH; \
+cd /data/wangj36/python/envs/myenv_py27/bin; \
+vcf_filter.py --local-script custom_vcf_filters.py /data/wangj36/VCF_files/AMR_299/split_by_chrome/Filter_Allele_Depth/AD_0.3_DP_10/chr14_filter_allele_depth.vcf exonicfunc-refGene-not-syn exac-nfe-maf func-refgene > /data/wangj36/VCF_files/AMR_299/split_by_chrome/Filter_Func_Maf_AD/chr14_func_exome_maf_AD_filtered.vcf;
 
 module load Anaconda; \
-source activate myenv_py27; \
-cd /data/wangj36/python/envs/myenv_py27; \
-vcf_filter.py --local-script custom_vcf_filters.py /data/wangj36/VCF_files/EUR_CASE/split_by_chrome/allele_depth_filterd/AD_0.3_DP_10/chr15_filter_allele_depth.vcf exonicfunc-refGene-not-syn exac-nfe-maf func-refgene > /data/wangj36/VCF_files/EUR_CASE/split_by_chrome/allele_depth_filterd_func_maf/chr15_func_exome_maf_AD_filtered.vcf;
+export PATH=/data/wangj36/python/envs/myenv_py27/bin:$PATH; \
+cd /data/wangj36/python/envs/myenv_py27/bin; \
+vcf_filter.py --local-script custom_vcf_filters.py /data/wangj36/VCF_files/AMR_299/split_by_chrome/Filter_Allele_Depth/AD_0.3_DP_10/chr15_filter_allele_depth.vcf exonicfunc-refGene-not-syn exac-nfe-maf func-refgene > /data/wangj36/VCF_files/AMR_299/split_by_chrome/Filter_Func_Maf_AD/chr15_func_exome_maf_AD_filtered.vcf;
 
 module load Anaconda; \
-source activate myenv_py27; \
-cd /data/wangj36/python/envs/myenv_py27; \
-vcf_filter.py --local-script custom_vcf_filters.py /data/wangj36/VCF_files/EUR_CASE/split_by_chrome/allele_depth_filterd/AD_0.3_DP_10/chr16_filter_allele_depth.vcf exonicfunc-refGene-not-syn exac-nfe-maf func-refgene > /data/wangj36/VCF_files/EUR_CASE/split_by_chrome/allele_depth_filterd_func_maf/chr16_func_exome_maf_AD_filtered.vcf;
+export PATH=/data/wangj36/python/envs/myenv_py27/bin:$PATH; \
+cd /data/wangj36/python/envs/myenv_py27/bin; \
+vcf_filter.py --local-script custom_vcf_filters.py /data/wangj36/VCF_files/AMR_299/split_by_chrome/Filter_Allele_Depth/AD_0.3_DP_10/chr16_filter_allele_depth.vcf exonicfunc-refGene-not-syn exac-nfe-maf func-refgene > /data/wangj36/VCF_files/AMR_299/split_by_chrome/Filter_Func_Maf_AD/chr16_func_exome_maf_AD_filtered.vcf;
 
 module load Anaconda; \
-source activate myenv_py27; \
-cd /data/wangj36/python/envs/myenv_py27; \
-vcf_filter.py --local-script custom_vcf_filters.py /data/wangj36/VCF_files/EUR_CASE/split_by_chrome/allele_depth_filterd/AD_0.3_DP_10/chr17_filter_allele_depth.vcf exonicfunc-refGene-not-syn exac-nfe-maf func-refgene > /data/wangj36/VCF_files/EUR_CASE/split_by_chrome/allele_depth_filterd_func_maf/chr17_func_exome_maf_AD_filtered.vcf;
+export PATH=/data/wangj36/python/envs/myenv_py27/bin:$PATH; \
+cd /data/wangj36/python/envs/myenv_py27/bin; \
+vcf_filter.py --local-script custom_vcf_filters.py /data/wangj36/VCF_files/AMR_299/split_by_chrome/Filter_Allele_Depth/AD_0.3_DP_10/chr17_filter_allele_depth.vcf exonicfunc-refGene-not-syn exac-nfe-maf func-refgene > /data/wangj36/VCF_files/AMR_299/split_by_chrome/Filter_Func_Maf_AD/chr17_func_exome_maf_AD_filtered.vcf;
 
 module load Anaconda; \
-source activate myenv_py27; \
-cd /data/wangj36/python/envs/myenv_py27; \
-vcf_filter.py --local-script custom_vcf_filters.py /data/wangj36/VCF_files/EUR_CASE/split_by_chrome/allele_depth_filterd/AD_0.3_DP_10/chr18_filter_allele_depth.vcf exonicfunc-refGene-not-syn exac-nfe-maf func-refgene > /data/wangj36/VCF_files/EUR_CASE/split_by_chrome/allele_depth_filterd_func_maf/chr18_func_exome_maf_AD_filtered.vcf;
+export PATH=/data/wangj36/python/envs/myenv_py27/bin:$PATH; \
+cd /data/wangj36/python/envs/myenv_py27/bin; \
+vcf_filter.py --local-script custom_vcf_filters.py /data/wangj36/VCF_files/AMR_299/split_by_chrome/Filter_Allele_Depth/AD_0.3_DP_10/chr18_filter_allele_depth.vcf exonicfunc-refGene-not-syn exac-nfe-maf func-refgene > /data/wangj36/VCF_files/AMR_299/split_by_chrome/Filter_Func_Maf_AD/chr18_func_exome_maf_AD_filtered.vcf;
 
 module load Anaconda; \
-source activate myenv_py27; \
-cd /data/wangj36/python/envs/myenv_py27; \
-vcf_filter.py --local-script custom_vcf_filters.py /data/wangj36/VCF_files/EUR_CASE/split_by_chrome/allele_depth_filterd/AD_0.3_DP_10/chr19_filter_allele_depth.vcf exonicfunc-refGene-not-syn exac-nfe-maf func-refgene > /data/wangj36/VCF_files/EUR_CASE/split_by_chrome/allele_depth_filterd_func_maf/chr19_func_exome_maf_AD_filtered.vcf;
+export PATH=/data/wangj36/python/envs/myenv_py27/bin:$PATH; \
+cd /data/wangj36/python/envs/myenv_py27/bin; \
+vcf_filter.py --local-script custom_vcf_filters.py /data/wangj36/VCF_files/AMR_299/split_by_chrome/Filter_Allele_Depth/AD_0.3_DP_10/chr19_filter_allele_depth.vcf exonicfunc-refGene-not-syn exac-nfe-maf func-refgene > /data/wangj36/VCF_files/AMR_299/split_by_chrome/Filter_Func_Maf_AD/chr19_func_exome_maf_AD_filtered.vcf;
 
 module load Anaconda; \
-source activate myenv_py27; \
-cd /data/wangj36/python/envs/myenv_py27; \
-vcf_filter.py --local-script custom_vcf_filters.py /data/wangj36/VCF_files/EUR_CASE/split_by_chrome/allele_depth_filterd/AD_0.3_DP_10/chr20_filter_allele_depth.vcf exonicfunc-refGene-not-syn exac-nfe-maf func-refgene > /data/wangj36/VCF_files/EUR_CASE/split_by_chrome/allele_depth_filterd_func_maf/chr20_func_exome_maf_AD_filtered.vcf;
+export PATH=/data/wangj36/python/envs/myenv_py27/bin:$PATH; \
+cd /data/wangj36/python/envs/myenv_py27/bin; \
+vcf_filter.py --local-script custom_vcf_filters.py /data/wangj36/VCF_files/AMR_299/split_by_chrome/Filter_Allele_Depth/AD_0.3_DP_10/chr20_filter_allele_depth.vcf exonicfunc-refGene-not-syn exac-nfe-maf func-refgene > /data/wangj36/VCF_files/AMR_299/split_by_chrome/Filter_Func_Maf_AD/chr20_func_exome_maf_AD_filtered.vcf;
 
 module load Anaconda; \
-source activate myenv_py27; \
-cd /data/wangj36/python/envs/myenv_py27; \
-vcf_filter.py --local-script custom_vcf_filters.py /data/wangj36/VCF_files/EUR_CASE/split_by_chrome/allele_depth_filterd/AD_0.3_DP_10/chr21_filter_allele_depth.vcf exonicfunc-refGene-not-syn exac-nfe-maf func-refgene > /data/wangj36/VCF_files/EUR_CASE/split_by_chrome/allele_depth_filterd_func_maf/chr21_func_exome_maf_AD_filtered.vcf;
+export PATH=/data/wangj36/python/envs/myenv_py27/bin:$PATH; \
+cd /data/wangj36/python/envs/myenv_py27/bin; \
+vcf_filter.py --local-script custom_vcf_filters.py /data/wangj36/VCF_files/AMR_299/split_by_chrome/Filter_Allele_Depth/AD_0.3_DP_10/chr21_filter_allele_depth.vcf exonicfunc-refGene-not-syn exac-nfe-maf func-refgene > /data/wangj36/VCF_files/AMR_299/split_by_chrome/Filter_Func_Maf_AD/chr21_func_exome_maf_AD_filtered.vcf;
 
 module load Anaconda; \
-source activate myenv_py27; \
-cd /data/wangj36/python/envs/myenv_py27; \
-vcf_filter.py --local-script custom_vcf_filters.py /data/wangj36/VCF_files/EUR_CASE/split_by_chrome/allele_depth_filterd/AD_0.3_DP_10/chr22_filter_allele_depth.vcf exonicfunc-refGene-not-syn exac-nfe-maf func-refgene > /data/wangj36/VCF_files/EUR_CASE/split_by_chrome/allele_depth_filterd_func_maf/chr22_func_exome_maf_AD_filtered.vcf;
+export PATH=/data/wangj36/python/envs/myenv_py27/bin:$PATH; \
+cd /data/wangj36/python/envs/myenv_py27/bin; \
+vcf_filter.py --local-script custom_vcf_filters.py /data/wangj36/VCF_files/AMR_299/split_by_chrome/Filter_Allele_Depth/AD_0.3_DP_10/chr22_filter_allele_depth.vcf exonicfunc-refGene-not-syn exac-nfe-maf func-refgene > /data/wangj36/VCF_files/AMR_299/split_by_chrome/Filter_Func_Maf_AD/chr22_func_exome_maf_AD_filtered.vcf;
 
